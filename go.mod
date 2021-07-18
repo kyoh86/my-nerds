@@ -1,4 +1,4 @@
-module github.com/kyoh86/mynerds
+module github.com/kyoh86/my-nerds
 
 go 1.16
 

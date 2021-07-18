@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/kyoh86/mynerds/app"
+	"github.com/kyoh86/my-nerds/app"
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 )

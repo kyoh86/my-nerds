@@ -1,26 +1,26 @@
-# mynerds
+# my-nerds
 
 A template of the go-app project
 
-[![PkgGoDev](https://pkg.go.dev/badge/kyoh86/mynerds)](https://pkg.go.dev/kyoh86/mynerds)
-[![Go Report Card](https://goreportcard.com/badge/github.com/kyoh86/mynerds)](https://goreportcard.com/report/github.com/kyoh86/mynerds)
-[![Coverage Status](https://img.shields.io/codecov/c/github/kyoh86/mynerds.svg)](https://codecov.io/gh/kyoh86/mynerds)
-[![Release](https://github.com/kyoh86/mynerds/workflows/Release/badge.svg)](https://github.com/kyoh86/mynerds/releases)
+[![PkgGoDev](https://pkg.go.dev/badge/kyoh86/my-nerds)](https://pkg.go.dev/kyoh86/my-nerds)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kyoh86/my-nerds)](https://goreportcard.com/report/github.com/kyoh86/my-nerds)
+[![Coverage Status](https://img.shields.io/codecov/c/github/kyoh86/my-nerds.svg)](https://codecov.io/gh/kyoh86/my-nerds)
+[![Release](https://github.com/kyoh86/my-nerds/workflows/Release/badge.svg)](https://github.com/kyoh86/my-nerds/releases)
 
 ## Description
 
 ```console
-$ mynerds man
+$ my-nerds man
 ```
 
-`mynerds` provides a template of the go-app project.
+`my-nerds` provides a template of the go-app project.
 
 ## Install
 
 ### For Golang developers
 
 ```console
-$ go get github.com/kyoh86/mynerds/cmd/mynerds
+$ go get github.com/kyoh86/my-nerds/cmd/my-nerds
 ```
 
 ### Homebrew/Linuxbrew
@@ -28,26 +28,26 @@ $ go get github.com/kyoh86/mynerds/cmd/mynerds
 ```console
 $ brew tap kyoh86/tap
 $ brew update
-$ brew install kyoh86/tap/mynerds
+$ brew install kyoh86/tap/my-nerds
 ```
 
 ### Makepkg
 
 ```console
-$ mkdir -p mynerds_build && \
-  cd mynerds_build && \
-  curl -iL --fail --silent https://github.com/kyoh86/mynerds/releases/latest/download/mynerds_PKGBUILD.tar.gz | tar -xvz
+$ mkdir -p my-nerds_build && \
+  cd my-nerds_build && \
+  curl -iL --fail --silent https://github.com/kyoh86/my-nerds/releases/latest/download/my-nerds_PKGBUILD.tar.gz | tar -xvz
 $ makepkg -i
 ```
 
 ## Available commands
 
-Use `mynerds [command] --help` for more information about a command.
-Or see the manual in [usage/mynerds.md](./usage/mynerds.md).
+Use `my-nerds [command] --help` for more information about a command.
+Or see the manual in [usage/my-nerds.md](./usage/my-nerds.md).
 
 ## Commands
 
-Manual: [usage/mynerds.md](./usage/mynerds.md).
+Manual: [usage/my-nerds.md](./usage/my-nerds.md).
 
 # LICENSE
 

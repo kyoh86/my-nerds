@@ -1,12 +1,12 @@
 brews:
   - install: |
-      bin.install "mynerds"
-      man1.install Dir.glob('mynerds*.1')
+      bin.install "my-nerds"
+      man1.install Dir.glob('my-nerds*.1')
     tap:
       owner: kyoh86
       name: homebrew-tap
     folder: Formula
-    homepage: https://github.com/kyoh86/mynerds
+    homepage: https://github.com/kyoh86/my-nerds
     description: GO GitHub project manager
 builds:
   - goos:
@@ -18,10 +18,10 @@ builds:
       - arm
       - arm64
       - "386"
-    main: ./cmd/mynerds
+    main: ./cmd/my-nerds
     hooks:
       post:
-        - go run -tags man -ldflags "-X=main.version={{.Version}} -X=main.commit={{.ShortCommit}} -X=main.date={{.Date}}" ./cmd/mynerds man
+        - go run -tags man -ldflags "-X=main.version={{.Version}} -X=main.commit={{.ShortCommit}} -X=main.date={{.Date}}" ./cmd/my-nerds man
 archives:
   - id: gzip
     format: tar.gz
@@ -37,4 +37,4 @@ archives:
       - README*
       - changelog*
       - CHANGELOG*
-      - mynerds*.1
+      - my-nerds*.1

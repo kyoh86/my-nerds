@@ -7,7 +7,7 @@ import (
 
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/cli"
-	"github.com/kyoh86/mynerds/app"
+	"github.com/kyoh86/my-nerds/app"
 	"github.com/spf13/cobra"
 )
 

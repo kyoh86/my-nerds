@@ -1,4 +1,4 @@
 package app
 
 // Name of this app
-const Name = "mynerds"
+const Name = "my-nerds"

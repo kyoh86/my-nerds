@@ -1,6 +1,6 @@
 //+build tools
 
-package gobase
+package mynerds
 
 import (
 	_ "github.com/goreleaser/goreleaser"

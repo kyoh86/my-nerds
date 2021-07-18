@@ -1,4 +1,4 @@
-module github.com/kyoh86/gobase
+module github.com/kyoh86/mynerds
 
 go 1.16
 

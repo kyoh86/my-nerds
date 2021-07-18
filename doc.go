@@ -1,2 +1,2 @@
-// Package gobase is the template for go project
-package gobase
+// Package mynerds is the template for go project
+package mynerds

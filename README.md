@@ -1,26 +1,26 @@
-# gobase
+# mynerds
 
 A template of the go-app project
 
-[![PkgGoDev](https://pkg.go.dev/badge/kyoh86/gobase)](https://pkg.go.dev/kyoh86/gobase)
-[![Go Report Card](https://goreportcard.com/badge/github.com/kyoh86/gobase)](https://goreportcard.com/report/github.com/kyoh86/gobase)
-[![Coverage Status](https://img.shields.io/codecov/c/github/kyoh86/gobase.svg)](https://codecov.io/gh/kyoh86/gobase)
-[![Release](https://github.com/kyoh86/gobase/workflows/Release/badge.svg)](https://github.com/kyoh86/gobase/releases)
+[![PkgGoDev](https://pkg.go.dev/badge/kyoh86/mynerds)](https://pkg.go.dev/kyoh86/mynerds)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kyoh86/mynerds)](https://goreportcard.com/report/github.com/kyoh86/mynerds)
+[![Coverage Status](https://img.shields.io/codecov/c/github/kyoh86/mynerds.svg)](https://codecov.io/gh/kyoh86/mynerds)
+[![Release](https://github.com/kyoh86/mynerds/workflows/Release/badge.svg)](https://github.com/kyoh86/mynerds/releases)
 
 ## Description
 
 ```console
-$ gobase man
+$ mynerds man
 ```
 
-`gobase` provides a template of the go-app project.
+`mynerds` provides a template of the go-app project.
 
 ## Install
 
 ### For Golang developers
 
 ```console
-$ go get github.com/kyoh86/gobase/cmd/gobase
+$ go get github.com/kyoh86/mynerds/cmd/mynerds
 ```
 
 ### Homebrew/Linuxbrew
@@ -28,26 +28,26 @@ $ go get github.com/kyoh86/gobase/cmd/gobase
 ```console
 $ brew tap kyoh86/tap
 $ brew update
-$ brew install kyoh86/tap/gobase
+$ brew install kyoh86/tap/mynerds
 ```
 
 ### Makepkg
 
 ```console
-$ mkdir -p gobase_build && \
-  cd gobase_build && \
-  curl -iL --fail --silent https://github.com/kyoh86/gobase/releases/latest/download/gobase_PKGBUILD.tar.gz | tar -xvz
+$ mkdir -p mynerds_build && \
+  cd mynerds_build && \
+  curl -iL --fail --silent https://github.com/kyoh86/mynerds/releases/latest/download/mynerds_PKGBUILD.tar.gz | tar -xvz
 $ makepkg -i
 ```
 
 ## Available commands
 
-Use `gobase [command] --help` for more information about a command.
-Or see the manual in [usage/gobase.md](./usage/gobase.md).
+Use `mynerds [command] --help` for more information about a command.
+Or see the manual in [usage/mynerds.md](./usage/mynerds.md).
 
 ## Commands
 
-Manual: [usage/gobase.md](./usage/gobase.md).
+Manual: [usage/mynerds.md](./usage/mynerds.md).
 
 # LICENSE
 

@@ -1,35 +1,23 @@
 package usecase
 
 import (
-	"context"
 	"errors"
 	"fmt"
 	"io/fs"
 	"path"
 	"strings"
 
-	"github.com/kyoh86/my-nerds/driver/ftp"
-)
-
-type ComicType int
-
-const (
-	ComicTypeUnknown ComicType = iota
-	ComicTypeRAR
-	ComicTypeDir
+	"github.com/kyoh86/my-nerds/driver/source"
+	"github.com/kyoh86/my-nerds/model"
 )
 
 var (
 	ErrStopWalking = errors.New("stop walking")
 )
 
-func WalkComics(ctx context.Context, user, pass string, walkFn func(string, ComicType) error) error {
-	conn, err := ftp.Connect(ctx, user, pass)
-	if err != nil {
-		return err
-	}
+func WalkComics(server *source.FTPServer, root string, walkFn func(string, model.ComicType) error) error {
 	done := map[string]struct{}{}
-	return ftp.Walk(conn, ftp.Root, func(path string, info fs.FileInfo) error {
+	return server.Walk(root, func(path string, info fs.FileInfo) error {
 		if info.IsDir() {
 			return nil
 		}
@@ -41,9 +29,10 @@ func WalkComics(ctx context.Context, user, pass string, walkFn func(string, Comi
 		if _, ok := done[p]; ok {
 			return nil
 		}
+		done[p] = struct{}{}
 		if err := walkFn(p, t); err != nil {
 			if errors.Is(err, ErrStopWalking) {
-				return ftp.ErrStopWalking
+				return source.ErrStopWalking
 			}
 			return fmt.Errorf("found comic %q: %w", p, err)
 		}
@@ -51,13 +40,13 @@ func WalkComics(ctx context.Context, user, pass string, walkFn func(string, Comi
 	})
 }
 
-func parseComicPath(p string) (string, ComicType, bool) {
+func parseComicPath(p string) (string, model.ComicType, bool) {
 	lower := strings.ToLower(p)
 	if strings.HasSuffix(lower, ".jpg") || strings.HasSuffix(lower, ".jpeg") || strings.HasSuffix(lower, ".png") {
-		return path.Dir(p), ComicTypeDir, true
+		return path.Dir(p), model.ComicTypeDir, true
 	}
 	if strings.HasSuffix(lower, ".rar") {
-		return p, ComicTypeRAR, true
+		return p, model.ComicTypeRAR, true
 	}
 	return p, 0, false
 }

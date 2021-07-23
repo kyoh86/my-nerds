@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/kyoh86/my-nerds/model"
 	"github.com/kyoh86/my-nerds/usecase"
 	"github.com/spf13/cobra"
 )
@@ -23,9 +24,13 @@ func init() {
 	facadeCommand.AddCommand(listCommand)
 }
 
-func list(cmd *cobra.Command, args []string) error {
+func list(cmd *cobra.Command, _ []string) error {
 	count := 0
-	return usecase.WalkComics(cmd.Context(), user, pass, func(path string, _ usecase.ComicType) error {
+	server, err := openServer(cmd.Context())
+	if err != nil {
+		return err
+	}
+	return usecase.WalkComics(server, serverRoot, func(path string, _ model.ComicType) error {
 		fmt.Println(path)
 		if listFlag.limit > 0 {
 			count++

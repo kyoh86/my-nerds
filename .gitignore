@@ -1,3 +1,6 @@
+# Data
+replace.txt
+
 # for goreleaser output with .goreleaser.yml
 /dist
 

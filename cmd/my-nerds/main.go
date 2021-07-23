@@ -23,21 +23,6 @@ var facadeCommand = &cobra.Command{
 	Version: fmt.Sprintf("%s-%s (%s)", version, commit, date),
 }
 
-var (
-	user string
-	pass string
-)
-
-const (
-	host = "192.168.11.12:21"
-	root = "/sataraid1/nerd"
-)
-
-func init() {
-	facadeCommand.PersistentFlags().StringVarP(&user, "user", "", "", "A user name to connect for the FTP server")
-	facadeCommand.PersistentFlags().StringVarP(&pass, "pass", "", "", "A password to connect for the FTP server")
-}
-
 func main() {
 	ctx := log.NewContext(context.Background(), &log.Logger{
 		Handler: cli.New(os.Stderr),

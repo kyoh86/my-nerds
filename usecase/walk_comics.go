@@ -15,38 +15,56 @@ var (
 	ErrStopWalking = errors.New("stop walking")
 )
 
-func WalkComics(server *source.FTPServer, root string, walkFn func(string, model.ComicType) error) error {
+func WalkComics(src source.Source, root string, walkFn func(model.Comic) error) error {
 	done := map[string]struct{}{}
-	return server.Walk(root, func(path string, info fs.FileInfo) error {
+	return src.Walk(root, func(filename string, info fs.FileInfo) error {
 		if info.IsDir() {
 			return nil
 		}
 
-		p, t, ok := parseComicPath(path)
-		if !ok {
+		comic := parseComicLikePath(filename)
+		if comic == nil {
 			return nil
 		}
-		if _, ok := done[p]; ok {
+		if _, ok := done[comic.Path]; ok {
 			return nil
 		}
-		done[p] = struct{}{}
-		if err := walkFn(p, t); err != nil {
+		done[comic.Path] = struct{}{}
+		switch comic.Type {
+		case model.ComicTypeRAR:
+			name := path.Base(comic.Path)
+			ext := path.Ext(name)
+			name = strings.TrimSuffix(name, ext)
+			i, err := model.ParseComicInfo(name)
+			if err != nil {
+				return nil
+			}
+			comic.Info = *i
+		case model.ComicTypeDir:
+			name := path.Base(comic.Path)
+			i, err := model.ParseComicInfo(name)
+			if err != nil {
+				return nil
+			}
+			comic.Info = *i
+		}
+		if err := walkFn(*comic); err != nil {
 			if errors.Is(err, ErrStopWalking) {
 				return source.ErrStopWalking
 			}
-			return fmt.Errorf("found comic %q: %w", p, err)
+			return fmt.Errorf("found error when walking on %q: %w", filename, err)
 		}
 		return nil
 	})
 }
 
-func parseComicPath(p string) (string, model.ComicType, bool) {
+func parseComicLikePath(p string) *model.Comic {
 	lower := strings.ToLower(p)
 	if strings.HasSuffix(lower, ".jpg") || strings.HasSuffix(lower, ".jpeg") || strings.HasSuffix(lower, ".png") {
-		return path.Dir(p), model.ComicTypeDir, true
+		return &model.Comic{Path: path.Dir(p), Type: model.ComicTypeDir}
 	}
 	if strings.HasSuffix(lower, ".rar") {
-		return p, model.ComicTypeRAR, true
+		return &model.Comic{Path: p, Type: model.ComicTypeRAR}
 	}
-	return p, 0, false
+	return nil
 }

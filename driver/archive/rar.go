@@ -1,35 +1,32 @@
-package source
+package archive
 
 import (
 	"io"
-	"os"
 	"path/filepath"
 
 	"github.com/gen2brain/go-unarr"
+	"github.com/kyoh86/my-nerds/ioutil"
 )
 
-func ExtractRAR(reader io.Reader, pathTo string) (retErr error) {
+func ExtractRAR(pathTo string, reader io.Reader) (retErr error) {
 	arch, err := unarr.NewArchiveFromReader(reader)
 	if err != nil {
 		return err
 	}
 	defer func() {
-		if err := arch.Close(); err != nil && retErr == nil {
-			retErr = err
+		if closeErr := arch.Close(); closeErr != nil && retErr == nil {
+			retErr = closeErr
 		}
 	}()
 	entries, err := arch.List()
 	if err != nil {
 		return err
 	}
-	if err := os.MkdirAll(pathTo, 0755); err != nil {
-		return err
-	}
 	for _, entry := range entries {
 		if err := arch.EntryFor(entry); err != nil {
 			return err
 		}
-		if err := save(filepath.Join(pathTo, arch.Name()), arch); err != nil {
+		if err := ioutil.CopyToFile(filepath.Join(pathTo, arch.Name()), arch); err != nil {
 			return err
 		}
 	}

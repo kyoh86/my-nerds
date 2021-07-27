@@ -1,8 +1,6 @@
 package model
 
 import (
-	"fmt"
-	"regexp"
 	"strconv"
 	"strings"
 )
@@ -15,170 +13,33 @@ const (
 	ComicTypeDir
 )
 
-type Comic struct {
+type ComicInfo struct {
 	Author string
 	Title  string
+	Number float64
 	Volume string
 	Append string
-	Number float64
 }
 
-var (
-	fuzzyAuthorPattern = `[\[［](?P<Author>[^\]］]+)[\]］]`
-	fuzzyTitlePattern  = `(?: *(?P<Title>[^\[［\(（]+))`
-	fuzzyNumberPattern = `(?: 第?(?P<Number>\d+(?:\.\d+)?)[巻集])`
-	fuzzyVolumePattern = `(?: (?P<Volume>[^\[［\(（]+))`
-	fuzzyAppendPattern = ` *(?:[\(（【](?P<Append>[^\)）】]+)[\)）】])* *`
-)
-
-func ParseComicFuzzy(name string) (comic *Comic, _ error) {
-	for _, pattern := range []string{
-		strings.Join([]string{
-			"^",
-			fuzzyAppendPattern,
-			fuzzyAuthorPattern,
-			fuzzyAppendPattern,
-			fuzzyTitlePattern,
-			fuzzyNumberPattern,
-			fuzzyVolumePattern + "?",
-			fuzzyAppendPattern,
-			"$",
-		}, ""),
-		strings.Join([]string{
-			"^",
-			fuzzyAppendPattern,
-			fuzzyTitlePattern,
-			fuzzyNumberPattern,
-			fuzzyVolumePattern + "?",
-			fuzzyAppendPattern,
-			fuzzyAuthorPattern,
-			fuzzyAppendPattern,
-			"$",
-		}, ""),
-		strings.Join([]string{
-			"^",
-			fuzzyAppendPattern,
-			fuzzyAuthorPattern,
-			fuzzyAppendPattern,
-			fuzzyTitlePattern,
-			fuzzyAppendPattern,
-			"$",
-		}, ""),
-		strings.Join([]string{
-			"^",
-			fuzzyAppendPattern,
-			fuzzyTitlePattern,
-			fuzzyAppendPattern,
-			fuzzyAuthorPattern,
-			fuzzyAppendPattern,
-			"$",
-		}, ""),
-	} {
-		reg := regexp.MustCompile(pattern)
-		subs := reg.FindStringSubmatch(name)
-		if len(subs) == 0 {
-			continue
-		}
-
-		comic = new(Comic)
-		for i, name := range reg.SubexpNames() {
-			if subs[i] == "" {
-				continue
-			}
-			switch name {
-			case "Author":
-				comic.Author = strings.TrimSpace(subs[i])
-			case "Title":
-				comic.Title = strings.TrimSpace(subs[i])
-			case "Volume":
-				comic.Volume = strings.TrimSpace(subs[i])
-			case "Append":
-				if comic.Append == "" {
-					comic.Append = subs[i]
-				} else {
-					comic.Append = comic.Append + " " + subs[i]
-				}
-			case "Number":
-				num, err := strconv.ParseFloat(subs[i], 64)
-				if err != nil {
-					return nil, err
-				}
-				comic.Number = num
-			}
-		}
-		break
-	}
-	if comic == nil {
-		return nil, fmt.Errorf("invalid comic: %s", name)
-	}
-	return
+type Comic struct {
+	Type ComicType
+	Path string
+	Info ComicInfo
 }
 
-var (
-	titlePattern  = `(?P<Title>.+)`
-	numberPattern = ` (?P<Number>\d+(?:\.\d+)?)巻`
-	volumePattern = `(?: (?P<Volume>.+))?`
-	authorPattern = ` \[(?P<Author>[^\]]+)\]`
-	appendPattern = `(?: \((?P<Append>[^\)]+)\))?`
-)
-
-func ParseComicName(name string) (comic *Comic, _ error) {
-	for _, pattern := range [][]string{
-		{titlePattern, numberPattern, volumePattern, authorPattern, appendPattern},
-		{titlePattern, authorPattern, appendPattern},
-	} {
-		reg := regexp.MustCompile("^" + strings.Join(pattern, "") + "$")
-		subs := reg.FindStringSubmatch(name)
-		if len(subs) == 0 {
-			continue
-		}
-
-		comic = new(Comic)
-		for i, name := range reg.SubexpNames() {
-			if subs[i] == "" {
-				continue
-			}
-			switch name {
-			case "Author":
-				comic.Author = strings.TrimSpace(subs[i])
-			case "Title":
-				comic.Title = strings.TrimSpace(subs[i])
-			case "Volume":
-				comic.Volume = strings.TrimSpace(subs[i])
-			case "Append":
-				comic.Append = subs[i]
-			case "Number":
-				num, err := strconv.ParseFloat(subs[i], 64)
-				if err != nil {
-					return nil, err
-				}
-				comic.Number = num
-			}
-		}
-		break
-	}
-	if comic.Author == "" {
-		return nil, fmt.Errorf("invalid comic name %q: no author", name)
-	}
-	if comic.Title == "" {
-		return nil, fmt.Errorf("invalid comic name %q: no title", name)
-	}
-	return
-}
-
-func (c Comic) String() string {
+func (c Comic) Rename() string {
 	parts := []string{
-		c.Title,
+		c.Info.Title,
 	}
-	if c.Number != 0 {
-		parts = append(parts, strconv.FormatFloat(c.Number, 'f', -1, 64)+"巻")
+	if c.Info.Number != 0 {
+		parts = append(parts, strconv.FormatFloat(c.Info.Number, 'f', -1, 64)+"巻")
 	}
-	if c.Volume != "" {
-		parts = append(parts, c.Volume)
+	if c.Info.Volume != "" {
+		parts = append(parts, c.Info.Volume)
 	}
-	parts = append(parts, "["+c.Author+"]")
-	if c.Append != "" {
-		parts = append(parts, "("+c.Append+")")
+	parts = append(parts, "["+c.Info.Author+"]")
+	if c.Info.Append != "" {
+		parts = append(parts, "("+c.Info.Append+")")
 	}
 	return strings.Join(parts, " ")
 }

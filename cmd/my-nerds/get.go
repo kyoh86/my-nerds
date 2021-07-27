@@ -1,11 +1,12 @@
 package main
 
 import (
-	"os"
 	"path"
 	"path/filepath"
 	"strings"
 
+	"github.com/kyoh86/my-nerds/app"
+	"github.com/kyoh86/my-nerds/driver/archive"
 	"github.com/kyoh86/my-nerds/usecase"
 	"github.com/spf13/cobra"
 )
@@ -30,16 +31,10 @@ func get(cmd *cobra.Command, args []string) error {
 	name := path.Base(pathFrom)
 	ext := filepath.Ext(name)
 	if strings.ToLower(ext) == ".rar" {
-		pathTo := filepath.Join(localRoot, strings.TrimSuffix(name, ext))
-		if err := os.MkdirAll(pathTo, 0755); err != nil {
-			return err
-		}
-		return usecase.ExtractComicRAR(server, pathFrom, pathTo)
+		pathTo := filepath.Join(app.LocalRoot, strings.TrimSuffix(name, ext))
+		return usecase.ExtractComic(server, archive.ExtractRAR, pathFrom, pathTo)
 	} else {
-		pathTo := filepath.Join(localRoot, name)
-		if err := os.MkdirAll(pathTo, 0755); err != nil {
-			return err
-		}
+		pathTo := filepath.Join(app.LocalRoot, name)
 		return usecase.DownloadComicDir(server, pathFrom, pathTo)
 	}
 }

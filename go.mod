@@ -21,6 +21,7 @@ require (
 	github.com/google/rpmpack v0.0.0-20210518075352-dc539ef4f2ea // indirect
 	github.com/goreleaser/goreleaser v0.164.0
 	github.com/goreleaser/nfpm/v2 v2.5.1 // indirect
+	github.com/guptarohit/asciigraph v0.5.2 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.0 // indirect
 	github.com/hashicorp/go-version v1.3.0 // indirect

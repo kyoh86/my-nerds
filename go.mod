@@ -24,7 +24,7 @@ require (
 	github.com/aymanbagabas/go-osc52 v1.2.2 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.0 // indirect
 	github.com/chrismellard/docker-credential-acr-env v0.0.0-20230214084458-fb789970a885 // indirect
-	github.com/cloudflare/circl v1.3.2 // indirect
+	github.com/cloudflare/circl v1.3.3 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.14.1 // indirect
 	github.com/dghubble/go-twitter v0.0.0-20221104224141-912508c3888b // indirect
 	github.com/dghubble/sling v1.4.1 // indirect
@@ -63,12 +63,9 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.2 // indirect
 	github.com/theupdateframework/go-tuf v0.5.2 // indirect
-	github.com/unidoc/unipdf/v3 v3.43.0
-	github.com/unidoc/unitype v0.4.0 // indirect
 	github.com/xanzy/go-gitlab v0.80.2 // indirect
 	go.mongodb.org/mongo-driver v1.11.2 // indirect
 	golang.org/x/exp v0.0.0-20230224173230-c95f2b4c22f2 // indirect
-	golang.org/x/image v0.5.0 // indirect
 	golang.org/x/tools v0.6.0 // indirect
 	google.golang.org/genproto v0.0.0-20230223222841-637eb2293923 // indirect
 	sigs.k8s.io/kind v0.17.0 // indirect

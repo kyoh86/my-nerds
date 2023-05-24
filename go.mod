@@ -42,15 +42,12 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/google/go-github/v50 v50.1.0 // indirect
 	github.com/google/safetext v0.0.0-20230106111101-7156a760e523 // indirect
-	github.com/goreleaser/chglog v0.4.2 // indirect
 	github.com/goreleaser/goreleaser v1.15.2
-	github.com/goreleaser/nfpm/v2 v2.26.0 // indirect
+	github.com/goreleaser/nfpm/v2 v2.29.0 // indirect
 	github.com/guptarohit/asciigraph v0.5.5
 	github.com/hashicorp/go-retryablehttp v0.7.2 // indirect
 	github.com/huandu/xstrings v1.4.0 // indirect
-	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jlaffaye/ftp v0.1.0
-	github.com/klauspost/compress v1.16.0 // indirect
 	github.com/letsencrypt/boulder v0.0.0-20230224192223-5ce4b5a6d44f // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/muesli/mango v0.2.0 // indirect
@@ -60,15 +57,11 @@ require (
 	github.com/sigstore/rekor v1.0.1 // indirect
 	github.com/sigstore/sigstore v1.5.2 // indirect
 	github.com/spf13/afero v1.9.4 // indirect
-	github.com/spf13/cobra v1.6.1
-	github.com/stretchr/testify v1.8.2 // indirect
+	github.com/spf13/cobra v1.7.0
 	github.com/theupdateframework/go-tuf v0.5.2 // indirect
-	github.com/unidoc/unipdf/v3 v3.43.0
-	github.com/unidoc/unitype v0.4.0 // indirect
 	github.com/xanzy/go-gitlab v0.80.2 // indirect
 	go.mongodb.org/mongo-driver v1.11.2 // indirect
 	golang.org/x/exp v0.0.0-20230224173230-c95f2b4c22f2 // indirect
-	golang.org/x/image v0.5.0 // indirect
 	golang.org/x/tools v0.6.0 // indirect
 	google.golang.org/genproto v0.0.0-20230223222841-637eb2293923 // indirect
 	sigs.k8s.io/kind v0.17.0 // indirect

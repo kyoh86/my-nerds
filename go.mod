@@ -63,13 +63,10 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.2 // indirect
 	github.com/theupdateframework/go-tuf v0.5.2 // indirect
-	github.com/unidoc/unipdf/v3 v3.43.0
-	github.com/unidoc/unitype v0.4.0 // indirect
 	github.com/xanzy/go-gitlab v0.80.2 // indirect
 	go.mongodb.org/mongo-driver v1.11.2 // indirect
 	golang.org/x/exp v0.0.0-20230224173230-c95f2b4c22f2 // indirect
-	golang.org/x/image v0.5.0 // indirect
-	golang.org/x/tools v0.6.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
 	google.golang.org/genproto v0.0.0-20230223222841-637eb2293923 // indirect
 	sigs.k8s.io/kind v0.17.0 // indirect
 )
